@@ -66,23 +66,31 @@ public class MainActivity extends AppCompatActivity {
                 //get name,value and comment(inital value
                 //and current value are same at the begin)
                 //pass to the item
-                String name = nameText.getText().toString();
+                try {
 
-                /*Take from https://stackoverflow.com/questions/15037465/converting-edittext-to-int-android
-                //2017/10/01
-                 */
-                String value =valueText.getText().toString();
-                int finalValue=Integer.parseInt(value);
+                    String name = nameText.getText().toString();
 
-                String comment = commentText.getText().toString();
+                    /*Take from https://stackoverflow.com/questions/15037465/converting-edittext-to-int-android
+                    //2017/10/01
+                     */
+                    String value = valueText.getText().toString();
+                    int finalValue = Integer.parseInt(value);
 
-                Item newItem = new Item(name,finalValue,comment,finalValue);
+                    String comment = commentText.getText().toString();
+                    Item newItem = new Item(name,finalValue,comment,finalValue);
+                    //delete the value in the dialog after click
+                    itemList.add(newItem);
+                    nameText.setText("");
+                    valueText.setText("");
+                    commentText.setText("");
+                }
+               catch (Exception e){
+                   System.out.println("Value type inputed not correct");
 
-                //delete the value in the dialog after click
-                itemList.add(newItem);
-                nameText.setText("");
-                valueText.setText("");
-                commentText.setText("");
+                }
+
+
+
 
                 //update the arrayList size show at the top
                 int numberOfItem =itemList.size();
@@ -108,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        /* Click set up Take From https://www.youtube.com/watch?v=2kUBcbUMDKE
+        **2017/10/01
+         */
+
         //click the item in the ArrayList
         olditemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -123,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 String comment = itemList.get(i).getComment();
                 String finalvalue = String.valueOf(value);
                 String initalFinalvalue = String.valueOf(inital_value);
-
+                String position = String.valueOf(i);
 
                 /*Take From https://stackoverflow.com/questions/8452526/
                 android-can-i-use-putextra-to-pass-multiple-values
@@ -136,8 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 extras.putString("EXTRA_VALUE",finalvalue);
                 extras.putString("EXTRA_COMMENT",comment);
                 extras.putString("EXTRA_INITAL",initalFinalvalue);
+                extras.putString("EXTRA_POSITION",position);
                 intent.putExtras(extras);
-                itemList.remove(i);
+                //itemList.remove(i);
 
                 //start the activity
                 startActivityForResult(intent,1);
@@ -187,13 +200,20 @@ public class MainActivity extends AppCompatActivity {
             String nameback = backextras.getString("BACK_NAME");
             String commentback = backextras.getString("BACK_COMMENT");
             String initalback = backextras.getString("BACK_INITAL");
+            String positionback = backextras.getString("BACK_POSITION");
 
-            int valueback = Integer.parseInt(valueSentBack);
-            int intal_valueback = Integer.parseInt(initalback);
+            int positionValue = Integer.parseInt(positionback);
+            if(nameback.equals("delete") ){
+                itemList.remove(positionValue);
+            }
+            else {
+                int valueback = Integer.parseInt(valueSentBack);
+                int intal_valueback = Integer.parseInt(initalback);
 
-            //passing new item values to the Item
-            Item newItem = new Item(nameback, valueback, commentback, intal_valueback);
-            itemList.add(newItem);
+                //passing new item values to the Item
+                Item newItem = new Item(nameback, valueback, commentback, intal_valueback);
+                itemList.set(positionValue, newItem);
+            }
 
             adapter.notifyDataSetChanged();
             saveInFile();

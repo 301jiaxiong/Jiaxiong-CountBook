@@ -13,8 +13,7 @@ public class Detail extends AppCompatActivity {
     private EditText valueText;
     private EditText commentText;
     private EditText currentText;
-
-
+    private TextView position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +31,11 @@ public class Detail extends AppCompatActivity {
         final String value = extras.getString("EXTRA_VALUE");
         final String inital = extras.getString("EXTRA_INITAL");
         String comment = extras.getString("EXTRA_COMMENT");
-        String position = extras.getString("EXTRA_POSITION");
+        String itemPosition = extras.getString("EXTRA_POSITION");
+
 
         //setup parameters for all the dialogs and buttons.
-
+        position = (TextView) findViewById(R.id.position);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(name);
         nameText = (EditText) findViewById(R.id.detail_name);
@@ -50,6 +50,7 @@ public class Detail extends AppCompatActivity {
 
 
         //Display the detail of the item
+        position.setText(itemPosition);
         nameText.setText(name);
         valueText.setText(inital);
         currentText.setText(value);
@@ -73,13 +74,15 @@ public class Detail extends AppCompatActivity {
                 String inital_value = valueText.getText().toString();
                 String name = nameText.getText().toString();
                 String comment = commentText.getText().toString();
-
+                String positionBack = position.getText().toString();
                 Intent goingBack = new Intent();
                 Bundle backextras = new Bundle();
                 backextras.putString("BACK_NAME",name);
                 backextras.putString("BACK_VALUE",finalvalue);
                 backextras.putString("BACK_COMMENT",comment);
                 backextras.putString("BACK_INITAL",inital_value);
+                backextras.putString("BACK_POSITION",positionBack);
+
                 goingBack.putExtras(backextras);
 
                 setResult(RESULT_OK, goingBack);
@@ -107,6 +110,7 @@ public class Detail extends AppCompatActivity {
                 String inital_value = valueText.getText().toString();
                 String name = nameText.getText().toString();
                 String comment = commentText.getText().toString();
+                String positionBack = position.getText().toString();
 
                 Intent goingBack = new Intent();
                 Bundle backextras = new Bundle();
@@ -114,6 +118,7 @@ public class Detail extends AppCompatActivity {
                 backextras.putString("BACK_VALUE",finalvalue);
                 backextras.putString("BACK_COMMENT",comment);
                 backextras.putString("BACK_INITAL",inital_value);
+                backextras.putString("BACK_POSITION",positionBack);
                 goingBack.putExtras(backextras);
 
                 setResult(RESULT_OK, goingBack);
@@ -142,6 +147,7 @@ public class Detail extends AppCompatActivity {
 
                 String name = nameText.getText().toString();
                 String comment = commentText.getText().toString();
+                String positionBack = position.getText().toString();
 
                 Intent goingBack = new Intent();
                 Bundle backextras = new Bundle();
@@ -149,6 +155,7 @@ public class Detail extends AppCompatActivity {
                 backextras.putString("BACK_VALUE",finalvalue);
                 backextras.putString("BACK_COMMENT",comment);
                 backextras.putString("BACK_INITAL",inital_value);
+                backextras.putString("BACK_POSITION",positionBack);
                 goingBack.putExtras(backextras);
 
                 setResult(RESULT_OK, goingBack);
@@ -163,8 +170,17 @@ public class Detail extends AppCompatActivity {
 
             public void onClick(View v) {
                 setResult(RESULT_OK);
+                String positionBack = position.getText().toString();
+                Intent goingBack = new Intent();
+                Bundle backextras = new Bundle();
+                backextras.putString("BACK_NAME","delete");
+                backextras.putString("BACK_VALUE","1");
+                backextras.putString("BACK_COMMENT","1");
+                backextras.putString("BACK_INITAL","1");
+                backextras.putString("BACK_POSITION",positionBack);
+                goingBack.putExtras(backextras);
 
-                setResult(RESULT_CANCELED);
+                setResult(RESULT_OK, goingBack);
                 finish();
             }
 
@@ -182,6 +198,7 @@ public class Detail extends AppCompatActivity {
                 String inital_value = valueText.getText().toString();
                 String name = nameText.getText().toString();
                 String comment = commentText.getText().toString();
+                String positionBack = position.getText().toString();
 
                 Intent goingBack = new Intent();
                 Bundle backextras = new Bundle();
@@ -189,6 +206,7 @@ public class Detail extends AppCompatActivity {
                 backextras.putString("BACK_VALUE",value);
                 backextras.putString("BACK_COMMENT",comment);
                 backextras.putString("BACK_INITAL",inital_value);
+                backextras.putString("BACK_POSITION",positionBack);
                 goingBack.putExtras(backextras);
 
                 setResult(RESULT_OK, goingBack);
