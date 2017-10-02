@@ -90,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                catch (Exception e){
+
+                   /*Toast take from https://stackoverflow.com/questions/3500197/
+                   **how-to-display-toast-in-android
+                   * 2017/10/02
+                    */
+
                    Toast.makeText(MainActivity.this, "Inital Value inputted not correct!\n" +
                                    "Only positive integer",
                            Toast.LENGTH_LONG).show();
