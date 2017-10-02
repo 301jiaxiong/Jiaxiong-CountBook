@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                      */
                     String value = valueText.getText().toString();
                     int finalValue = Integer.parseInt(value);
+                    if (finalValue < 0){
+                         throw new Exception();
+                    }
 
                     String comment = commentText.getText().toString();
                     Item newItem = new Item(name,finalValue,comment,finalValue);
@@ -84,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
                     valueText.setText("");
                     commentText.setText("");
                 }
+
                catch (Exception e){
-                   System.out.println("Value type inputed not correct");
+                   Toast.makeText(MainActivity.this, "Inital Value inputted not correct!\n" +
+                                   "Only positive integer",
+                           Toast.LENGTH_LONG).show();
 
                 }
 
