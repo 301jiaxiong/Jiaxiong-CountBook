@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
                 saveInFile();
-                //finish();
+
 
             }
         });
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
                 extras.putString("EXTRA_INITAL",initalFinalvalue);
                 extras.putString("EXTRA_POSITION",position);
                 intent.putExtras(extras);
-                //itemList.remove(i);
 
                 //start the activity
                 startActivityForResult(intent,1);

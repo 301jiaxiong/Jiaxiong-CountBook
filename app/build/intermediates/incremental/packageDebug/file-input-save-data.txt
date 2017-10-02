@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Oct 01 23:48:36 MDT 2017
+#Sun Oct 01 23:54:27 MDT 2017
 210.set=ANDROID_RESOURCE
 14.set=ANDROID_RESOURCE
 180.file=C\:\\U of A\\Cmput301\\asg1\\Jiaxiong-CountBook\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable\\abc_ic_clear_material.xml
